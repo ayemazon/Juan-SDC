@@ -17,7 +17,8 @@ class App extends React.Component {
     if (window.location.pathname !== '/') {
       $.ajax({
         type: 'GET',
-        url: `http://ec2-13-58-222-178.us-east-2.compute.amazonaws.com:8080/product${window.location.pathname.slice(9)}`,
+        // url: `http://ec2-13-58-222-178.us-east-2.compute.amazonaws.com:8080/product${window.location.pathname.slice(9)}`,
+        url: `/product${window.location.pathname.slice(9)}`,
         success: ({
           id,
           title,
@@ -36,12 +37,14 @@ class App extends React.Component {
               colors: colors,
             },
           }));
+          // alert('TITLE FROM GETPRODUCT', title);
         },
       });
     } else {
       $.ajax({
         type: 'GET',
-        url: `http://ec2-13-58-222-178.us-east-2.compute.amazonaws.com:8080/getallproducts`,
+        // url: `http://ec2-13-58-222-178.us-east-2.compute.amazonaws.com:8080/getallproducts`,
+        url: `getallproducts`,
         success: (results) => {
           this.setState((state) => ({
             allProducts: results,
@@ -54,6 +57,7 @@ class App extends React.Component {
   }
 
   render() {
+    //{alert('CURRENT PRODUCT IN APP', this.state.currentProduct)}
     return (
       <Wrapper>
         {window.location.pathname !== '/' ? (

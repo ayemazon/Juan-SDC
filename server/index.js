@@ -14,12 +14,14 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use('/products/:id', express.static(__dirname + '/../client/dist'));
 
 app.get('/product/:id', (req, res) => {
+  console.log('GETTING PRODUCT');
   queryDatabase(req.params.id, (result) => {
     res.send(result);
   });
 });
 
 app.get('/getallproducts', (req, res) => {
+  console.log('GETTING ALL PRODUCTS');
   queryAllFromDatabase((result, successBool) => {
     res.send(result.concat({ title: `Passed: ${successBool}`, id: 01 }));
   });

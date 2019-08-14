@@ -5,7 +5,8 @@
     "start": "concurrently --kill-others \"npm run server\" \"npm run react\" ",
     "build": "webpack -p",
     "test": "jest tests/",
-    "seedDb": "node utilities/_dbSeeder.js"
+    "seedDb": "node utilities/_dbSeeder.js",
+    "database": "mongod"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",

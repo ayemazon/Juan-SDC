@@ -49,7 +49,7 @@ class Product extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.currentProduct);
+    console.log('CURRENT PRODUCT', this.props.currentProduct);
     // TODO: Fix this.props.currentProduct.id is undefined
     this.setState((state) => ({
       currentColor: '',
