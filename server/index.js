@@ -2,6 +2,8 @@ const express = require('express');
 const queryDatabase = require('../database/index.js').queryDatabase;
 const queryAllFromDatabase = require('../database/index.js')
   .queryAllFromDatabase;
+const deleteFromDatabase = require('../database/index.js')
+  .deleteFromDatabase;
 const cors = require('cors');
 
 const app = express();
@@ -21,10 +23,19 @@ app.get('/product/:id', (req, res) => {
 });
 
 app.get('/getallproducts', (req, res) => {
-  console.log('GETTING ALL PRODUCTS');
   queryAllFromDatabase((result, successBool) => {
     res.send(result.concat({ title: `Passed: ${successBool}`, id: 01 }));
   });
+});
+
+app.put('/updateproduct', (req, res) => {
+  updateDatabase(req.body); //req.body needs to be a data array
+  // can return or can make a separate get request (the former is probably faster)
+});
+
+app.delete('/updateproduct', (req, res) => {
+  console.log('REQUEST', req.query.id);
+  deleteFromDatabase(req.query.id); //req.body is the removing ID
 });
 
 app.listen(port, () =>

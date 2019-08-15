@@ -5,6 +5,10 @@ mongoose.connect(
   { useNewUrlParser: true }
 );
 
+// if (db.ProductInfo) {
+//   db.ProuctInfo.dropDatabase();
+// }
+
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => console.log('connected to mongoDB'));
@@ -70,6 +74,14 @@ const queryAllFromDatabase = (cb) => {
   });
 };
 
+const deleteFromDatabase = (id) => {
+  console.log('DELETE ID', id)
+  ProductInfo.remove({id}, function(err) { // TO RESET COLLECTION
+    console.log('collection removed')
+  });
+}
+
 module.exports.updateDatabase = updateDatabase;
 module.exports.queryDatabase = queryDatabase;
 module.exports.queryAllFromDatabase = queryAllFromDatabase;
+module.exports.deleteFromDatabase = deleteFromDatabase;
