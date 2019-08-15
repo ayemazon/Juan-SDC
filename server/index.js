@@ -28,6 +28,11 @@ app.get('/getallproducts', (req, res) => {
   });
 });
 
+app.post('/updateproduct', (req, res) => {
+  updateDatabase(req.body); //req.body needs to be a data array
+  // can return or can make a separate get request (the former is probably faster)
+});
+
 app.put('/updateproduct', (req, res) => {
   updateDatabase(req.body); //req.body needs to be a data array
   // can return or can make a separate get request (the former is probably faster)

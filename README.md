@@ -28,6 +28,17 @@ let productInfoSchema = mongoose.Schema({
 To seed the database with 100 items matching the datashape of the above schema run: `npm run seedDb`
 
 ### API
+https://github.com/ayemazon/SDC-Juan-Service/blob/master/server/index.js
+
+C - Post: Create new item to database: '/updateproduct'
+
+R - Get information for one item from database: `/product/id`
+
+R - Get list of all items from database: '/getallproducts'
+
+U - Put: Update existing item record in database: '/updateproduct'
+
+D - Delete: Remove existing item record from database: '/updateproduct'
 
 Get one item from database: `/product/id`
 
