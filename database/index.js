@@ -90,10 +90,65 @@ module.exports.deleteFromDatabase = deleteFromDatabase;
 /////////////////////////////////////////////////////////
 
 const {Client} = require('pg');
-const client = new Client()
+const client = new Client(
+  // user: 'dbuser',
+  // host: 'database.server.com',
+  // database: 'mydb',
+  // password: 'secretpassword',
+  // port: 3211,
+);
 
-await client.connect()
 
-const res = await client.query('SELECT $1::text as message', ['Hello world!'])
-console.log(res.rows[0].message) // Hello world!
-await client.end()
+client.connect();
+
+const updateDatabase = (dataArray) => {
+  client.query('UPDATE products SET title=?, description=?, product_price=?, seller=?, colors=? WHERE product_id = ?', dataArray, function (error, results, fields) {
+    if (error) throw error;
+    //if (cb) {
+    //  cb(results);
+    //}
+  });
+};
+const addToDatabase = (dataArray) => {
+  client.query('INSERT INTO products (title, description, product_price, seller, colors) VALUES ($1, $2, $3, $4, $5)', dataArray, function (error, results, fields) {
+    if (error) throw console.error(error);
+    //if (cb) {
+    //  cb(results);
+    //}
+  });  
+};
+const queryDatabase = (id, cb) => {
+  // look up row with id and return the data
+  client.query('SELECT * FROM products WHERE product_id=id', [id], function (error, results, fields) {
+    if (error) throw error;
+    if (cb) {
+      cb(results);
+    }
+  });  
+};
+const queryAllFromDatabase = (cb) => {
+  // look up row with id and return the data
+  client.query('SELECT * FROM products', function (error, results, fields) {
+    if (error) throw error;
+    if (cb) {
+      cb(results);
+    }
+  });  
+};
+const deleteFromDatabase = (id, cb) => {
+  // look up row with id and return the data
+  client.query('DELETE FROM products WHERE product_id=id',[id], function (error, results, fields) {
+    if (error) throw error;
+    if (cb) {
+      cb(results);
+    }
+  });  
+};
+
+module.exports= {
+  updateDatabase,
+  addToDatabase,
+  queryDatabase,
+  queryAllFromDatabase,
+  deleteFromDatabase
+};

@@ -6,7 +6,8 @@
     "build": "webpack -p",
     "test": "jest tests/",
     "seedDb": "node utilities/_dbSeeder.js",
-    "database": "mongod"
+    "mongo": "mongod",
+    "postgres": "psql < schema.sql"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",

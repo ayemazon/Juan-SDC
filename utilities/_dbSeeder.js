@@ -1,10 +1,11 @@
 const updateDatabase = require('../database/index.js').updateDatabase;
+const addToDatabase = require('../database/index.js').addToDatabase;
 const faker = require('faker');
 
 const _dbSeeder = () => {
   let fakeInfoArr = [];
   let counter = 0;
-  while (counter < 10000000) {
+  while (counter < 100) {
     fakeInfoArr.push({
       id: counter + 1,
       title: faker.fake('{{commerce.productName}}'),
@@ -24,7 +25,7 @@ const _dbSeeder = () => {
     });
     counter++;
   }
-  updateDatabase(fakeInfoArr);
+  addToDatabase(fakeInfoArr);
 };
 
 _dbSeeder();
