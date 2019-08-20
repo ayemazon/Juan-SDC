@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+/*const mongoose = require('mongoose');
 
 mongoose.connect(
   'mongodb://localhost/products',
@@ -79,9 +79,21 @@ const deleteFromDatabase = (id) => {
   ProductInfo.remove({id}, function(err) { // TO RESET COLLECTION
     console.log('collection removed')
   });
-}
+};
 
 module.exports.updateDatabase = updateDatabase;
 module.exports.queryDatabase = queryDatabase;
 module.exports.queryAllFromDatabase = queryAllFromDatabase;
 module.exports.deleteFromDatabase = deleteFromDatabase;
+*/
+
+/////////////////////////////////////////////////////////
+
+const {Client} = require('pg');
+const client = new Client()
+
+await client.connect()
+
+const res = await client.query('SELECT $1::text as message', ['Hello world!'])
+console.log(res.rows[0].message) // Hello world!
+await client.end()

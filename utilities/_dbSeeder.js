@@ -4,7 +4,7 @@ const faker = require('faker');
 const _dbSeeder = () => {
   let fakeInfoArr = [];
   let counter = 0;
-  while (counter < 100) {
+  while (counter < 10000000) {
     fakeInfoArr.push({
       id: counter + 1,
       title: faker.fake('{{commerce.productName}}'),
