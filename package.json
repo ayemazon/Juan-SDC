@@ -7,7 +7,7 @@
     "test": "jest tests/",
     "seedDb": "node utilities/_dbSeeder.js",
     "mongo": "mongod",
-    "postgres": "psql < schema.sql"
+    "postgres": "pg_ctl -D /usr/local/var/postgres start"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",

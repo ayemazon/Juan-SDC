@@ -24,8 +24,8 @@ app.get('/product/:id', (req, res) => {
 
 app.get('/getallproducts', (req, res) => {
   queryAllFromDatabase((result, successBool) => {
-    // console.log('GETALL', result);
-    res.send(result);
+    // console.log('GETALL', result.rows);
+    res.send(result.rows);
     // res.send(result.concat({ title: `Passed: ${successBool}`, id: 01 }));
   });
 });

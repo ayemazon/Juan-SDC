@@ -7,11 +7,11 @@ CREATE DATABASE Products;
 DROP TABLE IF EXISTS products;
 
 CREATE TABLE products(
-  product_id SERIAL,
+  id SERIAL,
   title TEXT,
   description TEXT,
   product_price DECIMAL(10,2),
   seller TEXT,
   colors TEXT[],
-  PRIMARY KEY ( product_id )
+  PRIMARY KEY ( id )
 );

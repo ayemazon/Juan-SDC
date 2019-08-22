@@ -55,6 +55,7 @@ const _dbSeeder = () => {
   fakeInfoArr.forEach((fakeInfo) => {
     addToDatabase(fakeInfo)
   });
+  console.log("Seeding Done");
 };
 
 _dbSeeder();

@@ -128,10 +128,10 @@ const queryDatabase = (id, cb) => {
 };
 const queryAllFromDatabase = (cb) => {
   // look up row with id and return the data
-  client.query('SELECT * FROM products', function (error, results, fields) {
+  client.query('SELECT id, title FROM products', function (error, results, fields) {
     if (error) throw error;
     if (cb) {
-      cb(results);
+      cb(results, true);
     }
   });  
 };
