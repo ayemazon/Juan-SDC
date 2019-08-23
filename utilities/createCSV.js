@@ -15,7 +15,7 @@ const csvWriter = createCsvWriter({
 });
 
 const writeCsv = async () => {
-  for (var i = 0; i < 10; i++) {
+  for (var i = 0; i < 10000000; i++) {
     await csvWriter
     .writeRecords([{
     // id: i + 1,
