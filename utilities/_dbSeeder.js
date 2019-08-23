@@ -2,7 +2,7 @@ const updateDatabase = require('../database/index.js').updateDatabase;
 const addToDatabase = require('../database/index.js').addToDatabase;
 const faker = require('faker');
 
-const _dbSeeder = () => {
+const _dbSeeder = (i) => {
   /*
   let fakeInfoArr = [];
   let counter = 0;
@@ -28,10 +28,11 @@ const _dbSeeder = () => {
   }
   */
 
-  let fakeInfoArr = [];
+  // let fakeInfoArr = [];
   let counter = 0;
-  while (counter < 100) {
-    fakeInfoArr.push([
+  while (counter < 500000) {
+    // fakeInfoArr.push([
+      addToDatabase([
       faker.fake('{{commerce.productName}}'),
       faker.fake('{{lorem.lines}}'),
       faker.fake('{{commerce.price}}'),
@@ -48,14 +49,17 @@ const _dbSeeder = () => {
       })(),
     ]);
     counter++;
+    if (counter % 10000 === 0) {
+      console.log('Count at: ', counter);
+    }
   }
 
   // console.log('ARRAY', fakeInfoArr);
 
-  fakeInfoArr.forEach((fakeInfo) => {
-    addToDatabase(fakeInfo)
-  });
+  // fakeInfoArr.forEach((fakeInfo) => {
+  //   addToDatabase(fakeInfo)
+  // });
   console.log("Seeding Done");
 };
+ _dbSeeder();
 
-_dbSeeder();

@@ -18,7 +18,8 @@ app.use('/products/:id', express.static(__dirname + '/../client/dist'));
 app.get('/product/:id', (req, res) => {
   console.log('GETTING PRODUCT');
   queryDatabase(req.params.id, (result) => {
-    res.send(result);
+    console.log('PRODUCT: ', result.rows);
+    res.send(result.rows);
   });
 });
 

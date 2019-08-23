@@ -102,14 +102,14 @@ const client = new Client(
 client.connect();
 
 const updateDatabase = (dataArray) => {
-  client.query('UPDATE products SET title=$1, description=$2, product_price=$3, seller=$4, colors=$5 WHERE product_id = $6', dataArray, function (error, results, fields) {
+  client.query('UPDATE products SET title=$1, description=$2, product_price=$3, seller=$4, colors=$5 WHERE id = $6', dataArray, function (error, results, fields) {
     if (error) throw error;
     //if (cb) {
     //  cb(results);
     //}
   });
 };
-const addToDatabase = (dataArray) => {
+const addToDatabase = (dataArray) => { // look into bulk insertion. Explore CSV route
   client.query('INSERT INTO products (title, description, product_price, seller, colors) VALUES ($1, $2, $3, $4, $5)', dataArray, function (error, results, fields) {
     if (error) throw console.error(error);
     //if (cb) {
@@ -119,7 +119,7 @@ const addToDatabase = (dataArray) => {
 };
 const queryDatabase = (id, cb) => {
   // look up row with id and return the data
-  client.query('SELECT * FROM products WHERE product_id=$1', [id], function (error, results, fields) {
+  client.query('SELECT * FROM products WHERE id=$1', [id], function (error, results, fields) {
     if (error) throw error;
     if (cb) {
       cb(results);
@@ -137,7 +137,7 @@ const queryAllFromDatabase = (cb) => {
 };
 const deleteFromDatabase = (id, cb) => {
   // look up row with id and return the data
-  client.query('DELETE FROM products WHERE product_id=$1',[id], function (error, results, fields) {
+  client.query('DELETE FROM products WHERE id=$1',[id], function (error, results, fields) {
     if (error) throw error;
     if (cb) {
       cb(results);
