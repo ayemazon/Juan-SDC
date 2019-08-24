@@ -47,7 +47,7 @@ const mongoUpdateDatabase = (dataArray) => {
       });
     }
   );
-  !failure ? console.log('Success!') : null;
+  // !failure ? console.log('Success!') : null;
 };
 
 const mongoQueryDatabase = (id, cb) => {
@@ -76,9 +76,9 @@ const mongoQueryAllFromDatabase = (cb) => {
 };
 
 const mongoDeleteFromDatabase = (id) => {
-  console.log('DELETE ID', id)
-  ProductInfo.remove({id}, function(err) { // TO RESET COLLECTION
-    console.log('collection removed')
+  // console.log('DELETE ID', id);
+  ProductInfo.deleteOne({id}, function(err) { // TO RESET COLLECTION
+    // console.log('Collection Removed');
   });
 };
 
