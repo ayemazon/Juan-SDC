@@ -81,12 +81,6 @@ const mongoDeleteFromDatabase = (id) => {
   });
 };
 
-module.exports.updateDatabase = updateDatabase;
-module.exports.queryDatabase = queryDatabase;
-module.exports.queryAllFromDatabase = queryAllFromDatabase;
-module.exports.deleteFromDatabase = deleteFromDatabase;
-
-
 /////////////////////////////////////////////////////////
 
 const {Client} = require('pg');
@@ -152,7 +146,6 @@ module.exports= {
   queryAllFromDatabase,
   deleteFromDatabase,
   mongoUpdateDatabase,
-  mongoAddToDatabase,
   mongoQueryDatabase,
   mongoQueryAllFromDatabase,
   mongoDeleteFromDatabase,
