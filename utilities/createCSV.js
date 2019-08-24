@@ -5,7 +5,7 @@ const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const csvWriter = createCsvWriter({
   path: __dirname + '/seed.csv',
   header: [
-//   {id: 'id', title: 'id'},
+  {id: 'id', title: 'id'},
   {id: 'title', title: 'title'},
   {id: 'description', title: 'description'},
   {id: 'product_price', title: 'product_price'},
@@ -14,11 +14,9 @@ const csvWriter = createCsvWriter({
   ]
 });
 
-const writeCsv = async () => {
-  for (var i = 0; i < 10000000; i++) {
-    await csvWriter
-    .writeRecords([{
-    // id: i + 1,
+const generateFakeData = (i) => {
+  return [{
+    id: i + 1,
     title: faker.fake('{{commerce.productName}}'),
     description: faker.fake('{{lorem.lines}}'),
     product_price: faker.fake('{{commerce.price}}'),
@@ -33,13 +31,19 @@ const writeCsv = async () => {
       }
       return resultArr;
     })() + '}',
-    }], (err, dataToWrite) => {
+    }];
+};
+
+const writeCsv = async (size) => {
+  for (var i = 0; i < size; i++) {
+    await csvWriter
+    .writeRecords(generateFakeData(i), (err, dataToWrite) => {
     console.log('Added',dataToWrite, 'to CSV')
     });  
     if (i % 10000 === 0) console.log('Reached ', i, '!');
   }
 };
-writeCsv();    
+writeCsv(10000000);    
 /*
 const putInCsv = async (dataToWrite, cb) => {
   await fs.writeFile(__dirname + '/seed.csv', dataToWrite, 'utf8',async err => {
