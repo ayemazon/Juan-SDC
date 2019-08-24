@@ -2,9 +2,10 @@ const updateDatabase = require('../database/index.js').updateDatabase;
 const addToDatabase = require('../database/index.js').addToDatabase;
 const faker = require('faker');
 
-const generateFakeData = () => {
+
+const generateFakeData = (i) => {
   return [{
-    // id: i + 1,
+    id: i + 1,
     title: faker.fake('{{commerce.productName}}'),
     description: faker.fake('{{lorem.lines}}'),
     product_price: faker.fake('{{commerce.price}}'),
