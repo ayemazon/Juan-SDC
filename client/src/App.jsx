@@ -32,7 +32,7 @@ class App extends React.Component {
               id: id,
               title: title,
               description: description,
-              product_price: product_price,
+              product_price: parseFloat(product_price),
               seller: seller,
               colors: colors,
             },

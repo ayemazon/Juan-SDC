@@ -40,8 +40,6 @@ U - Put: Update existing item record in database: `/updateproduct`
 
 D - Delete: Remove existing item record from database: `/updateproduct`
 
-Get one item from database: `/product/id`
-
 ### Render Specific Product (Front End)
 
 To render a specific product on the frontend, simply hit this endpoint: `/products/id`
