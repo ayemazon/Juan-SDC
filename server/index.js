@@ -16,9 +16,9 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use('/products/:id', express.static(__dirname + '/../client/dist'));
 
 app.get('/product/:id', (req, res) => {
-  console.log('GETTING PRODUCT');
+  // console.log('GETTING PRODUCT');
   queryDatabase(req.params.id, (result) => {
-    console.log('PRODUCT: ', result.rows);
+    // console.log('PRODUCT: ', result.rows);
     res.send(result.rows);
   });
 });
@@ -42,7 +42,7 @@ app.put('/updateproduct', (req, res) => {
 });
 
 app.delete('/updateproduct', (req, res) => {
-  console.log('REQUEST', req.query.id);
+  // console.log('REQUEST', req.query.id);
   deleteFromDatabase(req.query.id); //req.body is the removing ID
 });
 
