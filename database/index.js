@@ -1,4 +1,4 @@
-/*const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 mongoose.connect(
   'mongodb://localhost/products',
@@ -24,7 +24,7 @@ let productSchema = mongoose.Schema({
 
 let ProductInfo = mongoose.model('ProductInfo', productSchema);
 
-const updateDatabase = (dataArray) => {
+const mongoUpdateDatabase = (dataArray) => {
   let failure = false;
   dataArray.forEach(
     ({ id, title, description, product_price, seller, colors }) => {
@@ -49,14 +49,14 @@ const updateDatabase = (dataArray) => {
   !failure ? console.log('Success!') : null;
 };
 
-const queryDatabase = (id, cb) => {
+const mongoQueryDatabase = (id, cb) => {
   // look up row with id and return the data
   ProductInfo.find({ id: id }).exec((err, result) =>
     err ? console.log(err) : cb(result[0])
   );
 };
 
-const queryAllFromDatabase = (cb) => {
+const mongoQueryAllFromDatabase = (cb) => {
   var allProducts = [];
   ProductInfo.find({}, (err, result) => {
     if (err) {
@@ -74,7 +74,7 @@ const queryAllFromDatabase = (cb) => {
   });
 };
 
-const deleteFromDatabase = (id) => {
+const mongoDeleteFromDatabase = (id) => {
   console.log('DELETE ID', id)
   ProductInfo.remove({id}, function(err) { // TO RESET COLLECTION
     console.log('collection removed')
@@ -85,7 +85,7 @@ module.exports.updateDatabase = updateDatabase;
 module.exports.queryDatabase = queryDatabase;
 module.exports.queryAllFromDatabase = queryAllFromDatabase;
 module.exports.deleteFromDatabase = deleteFromDatabase;
-*/
+
 
 /////////////////////////////////////////////////////////
 
@@ -150,5 +150,10 @@ module.exports= {
   addToDatabase,
   queryDatabase,
   queryAllFromDatabase,
-  deleteFromDatabase
+  deleteFromDatabase,
+  mongoUpdateDatabase,
+  mongoAddToDatabase,
+  mongoQueryDatabase,
+  mongoQueryAllFromDatabase,
+  mongoDeleteFromDatabase,
 };
