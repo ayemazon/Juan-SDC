@@ -1,3 +1,4 @@
+//MONGODB
 const mongoose = require('mongoose');
 
 mongoose.connect(
@@ -81,8 +82,8 @@ const mongoDeleteFromDatabase = (id) => {
   });
 };
 
-/////////////////////////////////////////////////////////
 
+// POSTGRES
 const {Client} = require('pg');
 const client = new Client(
   // user: 'dbuser',
