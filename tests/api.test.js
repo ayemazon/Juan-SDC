@@ -61,44 +61,42 @@ describe('Postgres queries', () => {
     });
   });
   
-  // it('Modify-product query runs in less than 50ms', (done) => {
-  //   let id = index;
-  //   let testData = [
-  //     faker.fake('{{commerce.productName}}'),
-  //     faker.fake('{{lorem.lines}}'),
-  //     faker.fake('{{commerce.price}}'),
-  //     faker.fake('{{internet.userName}}'),
-  //     (() => {
-  //       let resultArr = [];
-  //       let numberOfColors = Math.floor(Math.random() * Math.floor(4));
-  //       let colorCount = 0;
-  //       while (colorCount <= numberOfColors) {
-  //       resultArr.push(faker.fake('{{commerce.color}}'));
-  //       colorCount++;
-  //       }
-  //       return resultArr;
-  //     })()
-  //   ];
-  //   var t0 = performance.now();
-  //   db.updateDatabase([...testData,id], () => {
-  //     var t1 = performance.now()
-  //     console.log('POSTGRES MODIFY TIME: ', t1 - t0);
-  //     expect(t1 - t0).toBeLessThan(50);
-  //     done();
-  //   });
-  // });
-  
-  // it('Delete-product query runs in less than 50ms', (done) => {
-  //   let id = index;
-  //   var t0 = performance.now();
-
-  //   db.deleteFromDatabase(id, () => {
-  //     var t1 = performance.now()
-  //     console.log('POSTGRES DELETE TIME: ', t1 - t0);
-  //     expect(t1 - t0).toBeLessThan(50);
-  //     done();
-  //   });
-  // });
+  it('Modify-product query runs in less than 50ms', (done) => {
+    let id = index;
+    let testData = [
+      faker.fake('{{commerce.productName}}'),
+      faker.fake('{{lorem.lines}}'),
+      faker.fake('{{commerce.price}}'),
+      faker.fake('{{internet.userName}}'),
+      (() => {
+        let resultArr = [];
+        let numberOfColors = Math.floor(Math.random() * Math.floor(4));
+        let colorCount = 0;
+        while (colorCount <= numberOfColors) {
+        resultArr.push(faker.fake('{{commerce.color}}'));
+        colorCount++;
+        }
+        return resultArr;
+      })()
+    ];
+    var t0 = performance.now();
+    db.updateDatabase([...testData,id], () => {
+      var t1 = performance.now()
+      console.log('POSTGRES MODIFY TIME: ', t1 - t0);
+      expect(t1 - t0).toBeLessThan(50);
+      done();
+    });
+  });
+  it('Delete-product query runs in less than 50ms', (done) => {
+    let id = 10000000;
+    var t0 = performance.now();
+    db.deleteFromDatabase(id, () => {
+      var t1 = performance.now()
+      console.log('POSTGRES DELETE TIME: ', t1 - t0);
+      expect(t1 - t0).toBeLessThan(50);
+      done();
+    });
+  });
 });
 
 // describe('MongoDB queries', () => {
