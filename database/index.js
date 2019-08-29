@@ -95,21 +95,24 @@ const client = new Client(
 
 
 client.connect();
+client.query("SELECT setval('products_id_seq', max(id)) FROM products;", (error) => {
+  if (error) throw error;
+});
 
-const updateDatabase = (dataArray) => {
+const updateDatabase = (dataArray, cb) => {
   client.query('UPDATE products SET title=$1, description=$2, product_price=$3, seller=$4, colors=$5 WHERE id = $6', dataArray, function (error, results, fields) {
     if (error) throw error;
-    //if (cb) {
-    //  cb(results);
-    //}
+    if (cb) {
+     cb(results);
+    }
   });
 };
-const addToDatabase = (dataArray) => { // look into bulk insertion. Explore CSV route
+const addToDatabase = (dataArray, cb) => { // look into bulk insertion. Explore CSV route
   client.query('INSERT INTO products (title, description, product_price, seller, colors) VALUES ($1, $2, $3, $4, $5)', dataArray, function (error, results, fields) {
     if (error) throw console.error(error);
-    //if (cb) {
-    //  cb(results);
-    //}
+    if (cb) {
+     cb(results);
+    }
   });  
 };
 const queryDatabase = (id, cb) => {
