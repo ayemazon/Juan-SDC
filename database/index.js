@@ -1,4 +1,5 @@
-/*const mongoose = require('mongoose');
+//MONGODB
+const mongoose = require('mongoose');
 
 mongoose.connect(
   'mongodb://localhost/products',
@@ -23,8 +24,9 @@ let productSchema = mongoose.Schema({
 });
 
 let ProductInfo = mongoose.model('ProductInfo', productSchema);
+//ProductInfo.createIndex({id});
 
-const updateDatabase = (dataArray) => {
+const mongoUpdateDatabase = (dataArray) => {
   let failure = false;
   dataArray.forEach(
     ({ id, title, description, product_price, seller, colors }) => {
@@ -46,17 +48,19 @@ const updateDatabase = (dataArray) => {
       });
     }
   );
-  !failure ? console.log('Success!') : null;
+  // !failure ? console.log('Success!') : null;
 };
 
-const queryDatabase = (id, cb) => {
+const mongoQueryDatabase = (id, cb) => {
   // look up row with id and return the data
-  ProductInfo.find({ id: id }).exec((err, result) =>
-    err ? console.log(err) : cb(result[0])
+  ProductInfo.find({id}).exec((err, result) =>
+    {
+      console.log('MONGOQUERY: ', result);
+      err ? console.log(err) : cb(result[0])}
   );
 };
 
-const queryAllFromDatabase = (cb) => {
+const mongoQueryAllFromDatabase = (cb) => {
   var allProducts = [];
   ProductInfo.find({}, (err, result) => {
     if (err) {
@@ -74,21 +78,15 @@ const queryAllFromDatabase = (cb) => {
   });
 };
 
-const deleteFromDatabase = (id) => {
-  console.log('DELETE ID', id)
-  ProductInfo.remove({id}, function(err) { // TO RESET COLLECTION
-    console.log('collection removed')
+const mongoDeleteFromDatabase = (id) => {
+  // console.log('DELETE ID', id);
+  ProductInfo.deleteOne({id}, function(err) { // TO RESET COLLECTION
+    // console.log('Collection Removed');
   });
 };
 
-module.exports.updateDatabase = updateDatabase;
-module.exports.queryDatabase = queryDatabase;
-module.exports.queryAllFromDatabase = queryAllFromDatabase;
-module.exports.deleteFromDatabase = deleteFromDatabase;
-*/
 
-/////////////////////////////////////////////////////////
-
+// POSTGRES
 const {Client} = require('pg');
 const client = new Client(
   // user: 'dbuser',
@@ -100,21 +98,25 @@ const client = new Client(
 
 
 client.connect();
+client.query("SELECT setval('products_id_seq', max(id)) FROM products;", (error) => {
+  if (error) throw error;
+});
 
-const updateDatabase = (dataArray) => {
+const updateDatabase = (dataArray, cb) => {
   client.query('UPDATE products SET title=$1, description=$2, product_price=$3, seller=$4, colors=$5 WHERE id = $6', dataArray, function (error, results, fields) {
     if (error) throw error;
-    //if (cb) {
-    //  cb(results);
-    //}
+    if (cb) {
+      // console.log('UPDATED:' dataArray);
+     cb(results);
+    }
   });
 };
-const addToDatabase = (dataArray) => { // look into bulk insertion. Explore CSV route
+const addToDatabase = (dataArray, cb) => { // look into bulk insertion. Explore CSV route
   client.query('INSERT INTO products (title, description, product_price, seller, colors) VALUES ($1, $2, $3, $4, $5)', dataArray, function (error, results, fields) {
     if (error) throw console.error(error);
-    //if (cb) {
-    //  cb(results);
-    //}
+    if (cb) {
+     cb(results);
+    }
   });  
 };
 const queryDatabase = (id, cb) => {
@@ -150,5 +152,9 @@ module.exports= {
   addToDatabase,
   queryDatabase,
   queryAllFromDatabase,
-  deleteFromDatabase
+  deleteFromDatabase,
+  mongoUpdateDatabase,
+  mongoQueryDatabase,
+  mongoQueryAllFromDatabase,
+  mongoDeleteFromDatabase,
 };

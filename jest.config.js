@@ -15,5 +15,5 @@ module.exports = {
   // ],
   // coverageDirectory: "./coverage",
   verbose: true,
-  coverageReporters: ['json', 'lcov', 'text'],
+  coverageReporters: ['json', 'lcov', 'text']
 };

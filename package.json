@@ -4,8 +4,9 @@
     "server": "nodemon server/index.js",
     "start": "concurrently --kill-others \"npm run server\" \"npm run react\" ",
     "build": "webpack -p",
-    "test": "jest tests/",
-    "seedDb": "concurrently \"node utilities/_dbSeeder.js\" \"node utilities/_dbSeeder.js\" \"node utilities/_dbSeeder.js\" \"node utilities/_dbSeeder.js\" \"node utilities/_dbSeeder.js\"",
+    "apptest": "jest tests/app.test.js",
+    "apitest": "jest tests/api.test.js --detectOpenHandles",
+    "seedDb": "node utilities/createCSV.js",
     "mongo": "mongod",
     "postgres": "pg_ctl -D /usr/local/var/postgres start"
   },
@@ -21,7 +22,7 @@
     "css-loader": "^2.1.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
-    "jest": "^24.8.0",
+    "jest": "^24.9.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.33.0",
     "webpack-cli": "^3.3.4",
@@ -29,9 +30,12 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.1.2",
+    "@shelf/jest-mongodb": "^1.1.0",
     "acorn": "^6.1.1",
+    "babel-polyfill": "^6.26.0",
     "cors": "^2.8.5",
     "csv-writer": "^1.5.0",
+    "eslint": "^6.2.2",
     "express": "^4.16.4",
     "faker": "^4.1.0",
     "fs": "0.0.1-security",
@@ -48,9 +52,10 @@
   },
   "jest": {
     "setupTestFrameworkScriptFile": "jest-enzyme",
-    "testEnvironment": "enzyme",
+    "testEnvironment": "node",
     "testEnvironmentOptions": {
       "enzymeAdapter": "react16"
-    }
+    },
+    "preset": "@shelf/jest-mongodb"
   }
 }
