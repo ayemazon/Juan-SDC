@@ -24,6 +24,7 @@ let productSchema = mongoose.Schema({
 });
 
 let ProductInfo = mongoose.model('ProductInfo', productSchema);
+//ProductInfo.createIndex({id});
 
 const mongoUpdateDatabase = (dataArray) => {
   let failure = false;
@@ -52,8 +53,10 @@ const mongoUpdateDatabase = (dataArray) => {
 
 const mongoQueryDatabase = (id, cb) => {
   // look up row with id and return the data
-  ProductInfo.find({ id: id }).exec((err, result) =>
-    err ? console.log(err) : cb(result[0])
+  ProductInfo.find({id}).exec((err, result) =>
+    {
+      console.log('MONGOQUERY: ', result);
+      err ? console.log(err) : cb(result[0])}
   );
 };
 
@@ -103,6 +106,7 @@ const updateDatabase = (dataArray, cb) => {
   client.query('UPDATE products SET title=$1, description=$2, product_price=$3, seller=$4, colors=$5 WHERE id = $6', dataArray, function (error, results, fields) {
     if (error) throw error;
     if (cb) {
+      // console.log('UPDATED:' dataArray);
      cb(results);
     }
   });

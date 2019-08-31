@@ -30,7 +30,7 @@ describe('Postgres queries', () => {
       // console.log('POSTGRES SEARCH RESULT: ', result);
       var t1 = performance.now()
       console.log('POSTGRES SEARCH TIME: ', t1 - t0);
-      // expect(t1 - t0).toBeLessThan(50);
+      expect(t1 - t0).toBeLessThan(50);
       done();
     });
   });
@@ -103,7 +103,8 @@ describe('Postgres queries', () => {
 //   it('Search query runs in less than 50ms', (done) => {
 //     // run search query
 //     var t0 = performance.now();
-//     db.mongoQueryDatabase(index, (result) => {
+//     console.log('SEARCH INDEX:', index);
+//     db.mongoQueryDatabase(index, (err, result) => {
 //       console.log('MONGODB SEARCH RESULT: ', result);
 //       var t1 = performance.now()
 //       console.log('MONGODB SEARCH TIME: ',t1 - t0);

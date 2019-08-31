@@ -15,6 +15,5 @@ module.exports = {
   // ],
   // coverageDirectory: "./coverage",
   verbose: true,
-  coverageReporters: ['json', 'lcov', 'text'],
-  testEnvironment: 'node'
+  coverageReporters: ['json', 'lcov', 'text']
 };

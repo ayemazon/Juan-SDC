@@ -5,7 +5,7 @@
     "start": "concurrently --kill-others \"npm run server\" \"npm run react\" ",
     "build": "webpack -p",
     "apptest": "jest tests/app.test.js",
-    "apitest": "jest tests/api.test.js",
+    "apitest": "jest tests/api.test.js --detectOpenHandles",
     "seedDb": "node utilities/createCSV.js",
     "mongo": "mongod",
     "postgres": "pg_ctl -D /usr/local/var/postgres start"
@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.1.2",
+    "@shelf/jest-mongodb": "^1.1.0",
     "acorn": "^6.1.1",
     "babel-polyfill": "^6.26.0",
     "cors": "^2.8.5",
@@ -51,9 +52,10 @@
   },
   "jest": {
     "setupTestFrameworkScriptFile": "jest-enzyme",
-    "testEnvironment": "enzyme",
+    "testEnvironment": "node",
     "testEnvironmentOptions": {
       "enzymeAdapter": "react16"
-    }
+    },
+    "preset": "@shelf/jest-mongodb"
   }
 }
